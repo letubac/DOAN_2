@@ -1,7 +1,7 @@
 
 from django.urls import path, include
 from . import views
-from .import HodViews, StaffViews, StudentViews
+from .import HodViews, StaffViews, StudentViews,StaffGVView
 
 
 urlpatterns = [
@@ -75,6 +75,14 @@ urlpatterns = [
     path('staff_profile_update/', StaffViews.staff_profile_update, name="staff_profile_update"),
     path('staff_add_result/', StaffViews.staff_add_result, name="staff_add_result"),
     path('staff_add_result_save/', StaffViews.staff_add_result_save, name="staff_add_result_save"),
+
+    # URLS for Staff_gv
+    path('staff_gv_home/', StaffGVView.staff_gv_home, name="staff_gv_home"),
+    path('staff_gv_feedback/', StaffGVView.staff_gv_feedback, name="staff_gv_feedback"),
+    path('staff_gv_feedback_save/', StaffGVView.staff_gv_feedback_save, name="staff_gv_feedback_save"),
+    path('staff_gv_profile/', StaffGVView.staff_gv_profile, name="staff_gv_profile"),
+    path('staff_gv_profile_update/', StaffGVView.staff_gv_profile_update, name="staff_gv_profile_update"),
+
 
     # URL for Student
     path('student_home/', StudentViews.student_home, name="student_home"),
