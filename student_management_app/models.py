@@ -75,7 +75,16 @@ class Time_subject(models.Model):
     end_day=models.DateField()
     Mahocki=models.ForeignKey(SessionYearModel,on_delete=models.CASCADE,null=False)
     objects = models.Manager()
-
+class THUCHANH(models.Model):
+    MATH =models.AutoField(primary_key=True)
+    soTietTH=models.IntegerField()
+    objects = models.Manager()
+class Nhom_TH(models.Model):
+    MATH=models.ForeignKey(THUCHANH,on_delete=models.CASCADE,null=False)
+    startday_TH = models.DateField(auto_now_add=True)
+    endday_TH = models.DateField(auto_now=True)
+    name_nhom=models.CharField(null=False,max_length=20)
+    objects = models.Manager()
 
 class Subjects(models.Model):
     id =models.AutoField(primary_key=True)
@@ -87,6 +96,7 @@ class Subjects(models.Model):
     nienkhoa=models.CharField(max_length=50)
     ID_time=models.IntegerField()
     MAGV=models.ForeignKey(PHIEUDK_DAY,on_delete=models.CASCADE)
+    MATH=models.ForeignKey(THUCHANH,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
@@ -99,16 +109,7 @@ class Details_Subjects(models.Model):
     GiaTC=models.DecimalField(max_digits=8, decimal_places=3)
     objects = models.Manager()
 
-class THUCHANH(models.Model):
-    MATH =models.AutoField(primary_key=True)
-    soTietTH=models.IntegerField()
-    objects = models.Manager()
-class Nhom_TH(models.Model):
-    MATH=models.ForeignKey(THUCHANH,on_delete=models.CASCADE,null=False)
-    startday_TH = models.DateField(auto_now_add=True)
-    endday_TH = models.DateField(auto_now=True)
-    name_nhom=models.CharField(null=False,max_length=20)
-    objects = models.Manager()
+
 
 class Students(models.Model):
     id = models.AutoField(primary_key=True)
@@ -187,9 +188,15 @@ class FeedBackStudent(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
-
-
 class FeedBackStaffs(models.Model):
+    id = models.AutoField(primary_key=True)
+    staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
+    feedback = models.TextField()
+    feedback_reply = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+class FeedBackStaffs_GV(models.Model):
     id = models.AutoField(primary_key=True)
     staff_id = models.ForeignKey(Staffs, on_delete=models.CASCADE)
     feedback = models.TextField()
