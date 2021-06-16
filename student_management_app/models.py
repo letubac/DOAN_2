@@ -29,7 +29,7 @@ class AdminHOD(models.Model):
 
 #gv giang day
 class Staffs(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=13, blank=False, null=False)
     admin = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     address = models.TextField()
     profile_pic = models.FileField(null=True)
@@ -111,8 +111,16 @@ class Details_Subjects(models.Model):
 
 
 
+def return_timestamped_id():
+    prefix = "D18DCCN-"
+    # for i in range(1, 400):
+    #     constant = i
+    timestamp = str(int(time.time()))
+    default_value = prefix + timestamp
+    return default_value
+
 class Students(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=13, blank=False, null=False,default=return_timestamped_id)
     admin = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     profile_pic = models.FileField(null=True)
     gender = models.CharField(max_length=50)
