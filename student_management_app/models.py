@@ -29,7 +29,7 @@ class AdminHOD(models.Model):
 
 #gv giang day
 class Staffs(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=13, blank=False, null=False)
     admin = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     address = models.TextField()
     profile_pic = models.FileField(null=True)
@@ -48,7 +48,7 @@ class Detail_phieudkday(models.Model):
     objects = models.Manager()
 #phong giao vu hoc phan
 class Staffs_GV_HP(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=13,blank=False, null=False)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile_pic = models.FileField(null=True)
     address = models.TextField()
@@ -87,7 +87,7 @@ class Nhom_TH(models.Model):
     objects = models.Manager()
 
 class Subjects(models.Model):
-    id =models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=30, ,blank=False, null=False)
     subject_name = models.CharField(max_length=255)
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE, default=1) #need to give defauult course
     staff_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -110,9 +110,16 @@ class Details_Subjects(models.Model):
     objects = models.Manager()
 
 
+def return_timestamped_id():
+    prefix = "D18DCCN-"
+    # for i in range(1, 400):
+    #     constant = i
+    timestamp = str(int(time.time()))
+    default_value = prefix + timestamp
+    return default_value
 
 class Students(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.CharField(primary_key=True, max_length=13, blank=False, null=False,default=return_timestamped_id)
     admin = models.OneToOneField(CustomUser, on_delete = models.CASCADE)
     profile_pic = models.FileField(null=True)
     gender = models.CharField(max_length=50)
@@ -122,7 +129,7 @@ class Students(models.Model):
     birthday = models.CharField(null=True, max_length=50)
     objects = models.Manager()
 class PHONGHOC(models.Model):
-    MAPHONG=models.AutoField(primary_key=True)
+    MAPHONG = models.CharField(primary_key=True, max_length=6)
     BUOIHOC=models.CharField(max_length=20)
     Thu=models.CharField(max_length=20)
     Siso_phong=models.IntegerField()
