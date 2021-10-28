@@ -1,1 +1,1 @@
-# DOAN_2
+# DOAN_2- HỆ THỐNG ĐĂNG KÝ HỌC PHẦN KHOA CÔNG NGHỆ THÔNG TIN
